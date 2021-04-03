@@ -16,6 +16,13 @@ import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
 
+import {Amplitude} from '@amplitude/react-native';
+
+const AMP_API_KEY = '5425542015f2cb7b4c99a24456cd2df7';
+const ampInstance = Amplitude.getInstance();
+ampInstance.init(AMP_API_KEY);
+ampInstance.logEvent(`0.63.3 Mounted: ${Platform.OS}`);
+
 const App = () => {
   return (
     <>
@@ -32,7 +39,12 @@ const App = () => {
           )}
           <View style={styles.body}>
             <View style={styles.sectionContainer}>
-              <Button title={'Log Event'} onPress={() => {}} />
+              <Button
+                title={'Log Event'}
+                onPress={() => {
+                  ampInstance.logEvent(`0.63.3 Button Clicked: ${Platform.OS}`);
+                }}
+              />
             </View>
             <LearnMoreLinks />
           </View>
